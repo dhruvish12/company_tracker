@@ -1,0 +1,89 @@
+{
+  "name": "screen-tracker",
+  "version": "1.0.0",
+  "description": "Electron screen tracking app",
+  "author": "Your Name",
+  "license": "ISC",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "dist": "electron-builder",
+    "package-win": "electron-packager . screen-tracker --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=\"Screen Tracker\" --version-string.ProductName=\"Screen Tracker\"",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win"
+  },
+  "dependencies": {
+    "brace-expansion": "^4.0.1",
+    "electron-squirrel-startup": "^1.0.1",
+    "form-data": "^4.0.3",
+    "node-fetch": "^2.7.0",
+    "screenshot-desktop": "^1.15.1",
+    "wrappy": "^1.0.2"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.8.1",
+    "@electron-forge/maker-deb": "^7.8.1",
+    "@electron-forge/maker-rpm": "^7.8.1",
+    "@electron-forge/maker-squirrel": "^7.8.1",
+    "@electron-forge/maker-zip": "^7.8.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.8.1",
+    "@electron-forge/plugin-fuses": "^7.8.1",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^36.6.0",
+    "electron-builder": "^26.0.12",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.yourcompany.screentracker",
+    "productName": "Screen Tracker",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!node_modules/*/{test,__tests__}",
+      "!**/*.map"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icons/win/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icons/mac/icon.icns",
+      "sign": false
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icons/linux/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Screen Tracker"
+    },
+    "publish": null,
+    "asarUnpack": [
+      "node_modules/screenshot-desktop/**"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dhruvish12/electron_tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dhruvish12/electron_tracker/issues"
+  },
+  "homepage": "https://github.com/dhruvish12/electron_tracker#readme",
+  "keywords": [
+    "electron",
+    "screen-tracker",
+    "desktop-app"
+  ]
+}

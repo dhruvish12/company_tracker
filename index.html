@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Screen Tracker</title>
+</head>
+<body>
+  <h1>Screen Tracker</h1>
+  <button id="start">Start</button>
+  <button id="stop">Stop</button>
+  <p id="status"></p>
+
+  <script>
+    document.getElementById('start').onclick = () => {
+      window.electronAPI.start();
+      document.getElementById('status').innerText = "Tracking started...";
+    };
+
+    document.getElementById('stop').onclick = () => {
+      window.electronAPI.stop();
+    };
+
+    window.electronAPI.onStop((durationSec) => {
+      const mins = Math.floor(durationSec / 60);
+      const secs = durationSec % 60;
+      document.getElementById('status').innerText =
+        `Tracking stopped.\nTotal time: ${mins} min ${secs} sec`;
+    });
+  </script>
+</body>
+</html>
