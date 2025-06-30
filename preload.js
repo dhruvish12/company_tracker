@@ -1,7 +1,11 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
-  start: () => ipcRenderer.send('start-tracking'),
-  stop: () => ipcRenderer.send('stop-tracking'),
-  onStop: (callback) => ipcRenderer.on('tracking-stopped', (event, duration) => callback(duration))
+  loginSuccess: (user) => ipcRenderer.send('login-success', user),
+  logout: () => ipcRenderer.send('logout'),
+  startTracking: (accessToken) => ipcRenderer.send('start-tracking', accessToken),
+  stopTracking: () => ipcRenderer.send('stop-tracking'),
+   pauseTracking: () => ipcRenderer.send('pause-tracking'),
+    resumeTracking: () => ipcRenderer.send('resume-tracking'),
+  onTrackingStopped: (callback) => ipcRenderer.on('tracking-stopped', (event, duration) => callback(duration))
 });

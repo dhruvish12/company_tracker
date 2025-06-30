@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+body {
+    background-color: #f1f1f1;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-container {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 550px;
+    padding: 60px 50px;
+}
+
+.login-container h2 {
+    color: rgba(20, 20, 20, 1);
+    font-weight: 600;
+    font-size: 30px;
+}
+
+.login-container .form-label {
+    font-weight: 600;
+}
+
+.btn-submit {
+    background-color: rgba(138, 73, 214, 1);
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.login-container p {
+    font-size: 14px;
+    letter-spacing: 0%;
+}
+
+input {
+    border-radius: 20px !important;
+    background-color: rgba(20, 20, 20, 0.06) !important;
+}
+
+.d_input {
+    height: 44px;
+    padding: 0px 10px;
+    font-size: 14px;
+}
+
+.d_submit_btn {
+    height: 44px;
+    padding: 0px 0px;
+}
+
+@media (max-width: 480px) {
+    .login-container {
+        width: 90%;
+    }
+
+    .login-container {
+
+        padding: 40px 20px;
+    }
+    .login-container h2{
+        font-size: 25px;
+    }
+}

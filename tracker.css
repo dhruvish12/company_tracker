@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    background-color: #f1f1f1;
+    height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+.login-container {
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    padding: 20px 30px;
+    max-height: 580px;
+    overflow-y: auto;
+    border-radius: 16px;
+}
+
+.login-container h2 {
+    color: rgba(138, 73, 214, 1);
+    font-weight: 600;
+    font-size: 26px;
+    margin-bottom: 8px;
+}
+
+.login-container h2 img {
+    height: 26px;
+    width: 20px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: rgba(20, 20, 20, 0.6);
+    font-size: 36px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-status {
+    font-size: 14px;
+    background-color: rgba(255, 229, 229, 1);
+    border-radius: 20px;
+    padding: 4px 12px;
+    width: fit-content;
+    color: rgba(255, 0, 0, 1);
+    margin-top: 6px;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.btn-status.running {
+    background-color: rgba(234, 255, 237, 1);
+    color: rgba(23, 139, 44, 1);
+}
+
+.btn-status.paused {
+    background-color: rgba(251, 241, 214, 1);
+    color: rgba(221, 158, 0, 1);
+}
+
+.btn-action {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-action button {
+    border-radius: 20px;
+    background-color: transparent;
+    padding: 6px 20px;
+    font-size: 14px;
+}
+
+.btn-action .btn-start {
+    background-color: rgba(234, 255, 237, 1);
+    border: 1px solid rgba(234, 255, 237, 1);
+    color: rgba(23, 139, 44, 1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.btn-action .btn-start i {
+    color: rgba(23, 139, 44, 1);
+    font-size: 18px;
+}
+
+.btn-action .btn-pause {
+    background-color: rgba(251, 241, 214, 1);
+    border: 1px solid rgba(251, 241, 214, 1);
+    color: rgba(221, 158, 0, 1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.btn-action .btn-pause i {
+    color: rgba(221, 158, 0, 1);
+    font-size: 18px;
+}
+
+.btn-action .btn-stop {
+    background-color: rgba(255, 234, 234, 1);
+    border: 1px solid rgba(255, 234, 234, 1);
+    color: rgba(255, 0, 0, 1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.btn-action .btn-stop i {
+    color: rgba(255, 0, 0, 1);
+    font-size: 18px;
+}
+
+.btn-action button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.counter {
+    background-color: rgba(20, 20, 20, 0.06);
+    margin-top: 16px;
+    border-radius: 20px;
+    padding: 15px;
+}
+
+.Session {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.total-time {
+    color: rgba(20, 20, 20, 0.6);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.timer {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.time-border {
+    border-bottom: 1px solid rgba(20, 20, 20, 0.2);
+    padding: 10px 0px;
+}
+
+.btn-logout {
+    background-color: rgba(251, 0, 0, 1);
+    margin-top: 24px;
+    width: 100%;
+    border: none;
+    padding: 10px 0px;
+    border-radius: 20px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+    .login-container h2 {
+        font-size: 22px;
+    }
+
+    .btn-action {
+        flex-wrap: wrap;
+    }
+
+    .btn-action button {
+        padding: 6px 16px;
+    }
+
+    .stat-value {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 375px) {
+    .counter {
+        padding: 15px 10px;
+    }
+
+    .total-time {
+        gap: 5px;
+        font-size: 13px;
+    }
+
+    .Session {
+        font-size: 15px;
+    }
+
+    .btn-action button {
+        padding: 5px 14px;
+        font-size: 13px;
+    }
+}
