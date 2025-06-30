@@ -82,7 +82,7 @@ app.whenReady().then(() => {
     endTime = null;
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/timelog/start', {
+      const response = await fetch('https://kiglobals.com/api/timelog/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -114,7 +114,7 @@ app.whenReady().then(() => {
     pauseTime = new Date();
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/timelog/pause', {
+      const response = await fetch('https://kiglobals.com/api/timelog/pause', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -147,7 +147,7 @@ app.whenReady().then(() => {
     const durationSec = Math.floor(durationMs / 1000);
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/timelog/stop', {
+      const response = await fetch('https://kiglobals.com/api/timelog/stop', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -182,7 +182,7 @@ async function uploadScreenshot(filePath) {
   form.append('image', fs.createReadStream(filePath));
 
   try {
-    const response = await fetch('https://kalathiyainfotechapi.in/api/screenshots', {
+    const response = await fetch('https://kiglobals.com/api/screenshots', {
       method: 'POST',
       body: form,
       headers: form.getHeaders(),
