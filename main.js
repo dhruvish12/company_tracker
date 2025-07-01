@@ -4,7 +4,7 @@ const fs = require('fs');
 const screenshot = require('screenshot-desktop');
 const fetch = require('node-fetch'); // Ensure version 2.x
 const FormData = require('form-data');
-let userId = 1;
+let userId = null; // Store the user ID after login
 
 let loginWindow, trackerWindow;
 let screenshotInterval = null;
@@ -73,6 +73,7 @@ app.whenReady().then(() => {
     createLoginWindow();
   });
 
+  let isPaused = false; 
   ipcMain.on('start-tracking', async () => {
     if (screenshotInterval) return;
 
@@ -80,6 +81,7 @@ app.whenReady().then(() => {
     startTime = new Date();
     pauseTime = null;
     endTime = null;
+    isPaused = false;
 
     try {
       const response = await fetch('https://kiglobals.com/api/timelog/start', {
@@ -98,6 +100,7 @@ app.whenReady().then(() => {
     }
 
     screenshotInterval = setInterval(() => {
+      if (isPaused) return; // Do not take screenshot if paused
       screenshot({ format: 'jpg' })
         .then((img) => {
           fs.writeFileSync(tempFile, img);
@@ -112,6 +115,13 @@ app.whenReady().then(() => {
 
   ipcMain.on('pause-tracking', async () => {
     pauseTime = new Date();
+    isPaused = true;
+
+    if (screenshotInterval) {
+      clearInterval(screenshotInterval);
+      screenshotInterval = null;
+      console.log("🛑 Screenshot paused.");
+    }
 
     try {
       const response = await fetch('https://kiglobals.com/api/timelog/pause', {
@@ -132,9 +142,26 @@ app.whenReady().then(() => {
 
   ipcMain.on('resume-tracking', () => {
     console.log('▶️ Resumed tracking.');
+    isPaused = false;
     pauseTime = null;
-    // You can optionally add an API call here to log resume time
+
+     if (!screenshotInterval) {
+    screenshotInterval = setInterval(() => {
+       if (isPaused) return; // Double check
+      screenshot({ format: 'jpg' })
+        .then((img) => {
+           fs.writeFileSync(tempFile, img);
+          uploadScreenshot(tempFile);
+        })
+         .catch((err) => {
+          console.error('❌ Screenshot error:', err);
+          dialog.showErrorBox('Screenshot Error', `An error occurred while taking a screenshot:\n${err.message}`);
+        });
+    }, 60000);
+     console.log("📸 Screenshot resumed.");
+  }
   });
+ 
 
   ipcMain.on('stop-tracking', async (event) => {
     if (!screenshotInterval) return;
