@@ -150,6 +150,17 @@
       }
       
       startBtn.addEventListener('click', () => {
+          const userId = localStorage.getItem('user_id');
+          const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+          const stored = JSON.parse(localStorage.getItem('tracking_session'));
+
+          if (stored && stored.user_id === userId && stored.date === today) {
+            alert("Session already started today. Try again tomorrow.");
+            return;
+          }
+
+          localStorage.setItem('tracking_session', JSON.stringify({ user_id: userId, date: today }));
+
           if (!timerInterval) {
             console.log("START clicked");
             startTime = Date.now();
@@ -172,6 +183,14 @@
             pauseBtn.disabled = false;
             stopBtn.disabled = false;
           }
+      });
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const session = JSON.parse(localStorage.getItem('tracking_session'));
+        if (session && session.date !== today) {
+          localStorage.removeItem('tracking_session');
+        }
       });
       
       pauseBtn.addEventListener('click', () => {

@@ -52,8 +52,11 @@ let endTime = null;
       trackerWindow.loadFile('tracker.html');
 
       trackerWindow.webContents.on('did-finish-load', () => {
-        trackerWindow.webContents.send('user-data', userData);
-      });
+    trackerWindow.webContents.send('user-data', userData);
+    trackerWindow.webContents.executeJavaScript(
+      `localStorage.setItem('user_id', '${userData.id}');`
+    );
+  });
 
       trackerWindow.on('closed', () => {
         trackerWindow = null;
