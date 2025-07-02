@@ -134,6 +134,25 @@
       }
     }
 
+    function startTimer(resume = false) {
+    if (!resume) {
+      startTime = Date.now();
+      localStorage.setItem('start_time', startTime);
+    } else {
+      startTime = Date.now() - elapsedTime;
+    }
+
+    timerInterval = setInterval(() => {
+      elapsedTime = Date.now() - startTime;
+      timerDisplay.textContent = formatTime(elapsedTime);
+      totalTimeDisplay.textContent = getFormattedTotalHour(elapsedTime);
+
+      localStorage.setItem('active_time', JSON.stringify({
+        activeTime: elapsedTime
+      }));
+    }, 1000);
+  }
+
     function updateDisplay() {
       const now = Date.now();
       const totalElapsed = now - sessionStartTime;
@@ -154,14 +173,6 @@
     startBtn.addEventListener('click', () => {
       const userId = localStorage.getItem('user_id');
       const today = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
-      // const stored = JSON.parse(localStorage.getItem('tracking_session'));
-
-      // if (stored && stored.user_id === userId && stored.date === today) {
-      //   alert("Session already started today. Try again tomorrow.");
-      //   return;
-      // }
-
-      // localStorage.setItem('tracking_session', JSON.stringify({ user_id: userId, date: today }));
 
       if (!timerInterval) {
         console.log("START clicked");
@@ -280,7 +291,7 @@
     stopBtn.disabled = true;
     
   </script>
-  <script>
+ <script>
     window.onload = () => {
       const userId = localStorage.getItem('user_id'); // if needed
       fetch(`https://kiglobals.com/api/getAllUserSessions`)
@@ -302,11 +313,21 @@
             console.log("Today Date:", todayDate);
 
             if (createdDate === todayDate) {
-               alert("You already started a session today.");
+              alert("You already started a session today.");
               startBtn.disabled = true;
               pauseBtn.disabled = true;
               stopBtn.disabled = true;
               console.log("Session created today, disabling buttons.",userData.end_time);
+              const time = localStorage.getItem('active_time');
+              if (time) {
+                const activeTime = JSON.parse(time);
+                timerDisplay.textContent = formatTime(activeTime.activeTime);
+                totalTimeDisplay.textContent = getFormattedTotalHour(activeTime.activeTime);
+                 pauseBtn.innerHTML = "RESUME"; // resume upar to fari time chalu thase ne ?? ha pan 0 thi nahi jooo
+              } else {
+                timerDisplay.textContent = "00:00:00";
+                totalTimeDisplay.textContent = "0 minutes";
+              }
               // timerDisplay.textContent = userData.end_time;
             } else {
               // alert("This is not today's session.");
@@ -318,6 +339,7 @@
         });
     };
   </script>
+
 
 </body>
 
