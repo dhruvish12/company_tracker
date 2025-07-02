@@ -26,10 +26,11 @@
                     <input type="email" class="form-control d_input" id="email" name="email" placeholder="Email"
                         required>
                 </div>
-                <div class="mb-3 text-start">
-                    <label for="password" class="form-label ">Password</label>
-                    <input type="password" class="form-control d_input" id="password" name="password"
-                        placeholder="Password" required>
+                <div class="mb-3 text-start position-relative">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control d_input" id="password" name="password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye-slash toggle-password" id="togglePassword"
+                       style="position: absolute; top: 45px; right: 15px; cursor: pointer;"></i>
                 </div>
                 <div class="mt-4 pt-3">
                     <button type="submit" class="btn btn-submit d_submit_btn" id="submit-btn">
@@ -100,6 +101,17 @@
             submitBtn.disabled = false;
             btnText.textContent = 'Submit';
           }
+        });
+
+
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
       </script>
    
